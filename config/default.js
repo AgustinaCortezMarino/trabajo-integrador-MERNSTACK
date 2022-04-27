@@ -1,4 +1,6 @@
-require('dotenv').config();
+require("dotenv").config();
 module.exports = {
-    //Complete with DB Config
-}
+  db: {
+    con: { conString: process.env.MONGO_URI },
+  },
+};

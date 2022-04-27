@@ -1,18 +1,30 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-require('dotenv').config();
-const Router = require('./src/routes/resource');
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+require("dotenv").config();
+const Router = require("./src/routes/lugares");
 const app = express();
 
-app.use(logger('dev'));
+const mongoose = require("mongoose");
+const mongooseConnectionString = config.get("db.con.conString");
+mongoose
+  .connect(mongooseConnectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("connected to DB"))
+  .catch((err) => {
+    throw err;
+  });
+
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 //complete with your resource
-app.use('/resource', Router);
+app.use("/lugares", Router);
 
 module.exports = app;
