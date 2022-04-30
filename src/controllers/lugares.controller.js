@@ -3,7 +3,7 @@ const config = require("config");
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const LugarSchema = require("./schemas/lugar.schema");
-const { Lugar } = require("../models/lugar.model");
+const { Lugar } = require("../models/lugares.models");
 
 async function getLugares(req, res) {
   try {
